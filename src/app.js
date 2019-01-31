@@ -1,36 +1,37 @@
-const arr = (arr) => {
+const basketBonuses = (str, arr) => {
     const num =  arr.reduce((num, current) => num + current);
     const calc = ((num - 10000) / 100) * 5;
-    const massege = `сумма: ${num} бонусы:`;
 
+    let bonuses;
     if (num > 10000) {
-        return `${massege} ${calc.toFixed(0)}`
+        bonuses = calc.toFixed(0)
+    } else {
+        bonuses = "отсутствуют"
     }
-    return `${massege} ---`;
+    return `${str[0]} ${num} ${str[1]} ${bonuses}`;
 };
 
 console.log("--- Задание 1");
-console.log(arr([200, 550, 4000, 23, 58, 5000, 485, 711]));
-console.log(arr([200, 550, 4000, 23, 58]));
+console.log(basketBonuses`сумма: ${[200, 550, 4000, 23, 58, 5000, 485, 711]} бонусов`);
+console.log(basketBonuses`сумма: ${[200, 550, 4000, 23, 58]} бонусы `);
 
-
-const points = (blans, num) => {
-    let str;
+const points = (str, num) => {
+    let end;
     if((num % 5) === 0 || (num % 100) === 11){
-        str = 'баллов'
+        end = 'ов'
     }else if((num % 10) === 1 ){
-        str = "балл"
+        end = ""
     }else{
-        str = 'балла'
+        end = 'а'
     }
 
-    return `${blans} ${num} ${str}`;
+    return `${str[0]} ${num} ${str[1]}${end}`;
 };
 
 console.log("--- Задание 2");
-console.log(points("Ваш баланс:", 523));
-console.log(points("Ваш баланс:", 6000));
-console.log(points("Ваш баланс:", 5001));
+console.log(points`Ваш баланс:${523} балл`);
+console.log(points`Ваш баланс:${6000} балл`);
+console.log(points`Ваш баланс:${5001} балл`);
 
 function gamePoints(arr, top){
     "use strict";
@@ -39,7 +40,7 @@ function gamePoints(arr, top){
         return (a < b)? 1 : -1;
     });
 
-    let num = 0;
+    var num = 0;
 
     for (var i = 0; i < top; i++) {
         num += arr[i];
